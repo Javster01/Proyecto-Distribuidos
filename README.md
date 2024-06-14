@@ -1,9 +1,4 @@
-# Proyecto-Distribuidos
-
-Proyecto realizado para la materia de Sistemas Distribuidos
-
-Se divide en:
--Inventario
--Proveedores
--Costos
--Ventas
+Sebastian Camargo
+Juan Diego Gonzalez
+Juliana Rincon
+Luisa Fernanda Rincon
