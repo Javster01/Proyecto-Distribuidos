@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RunApp {
     public static void main(String[] args) {
-        System.out.println("Hola mundo");
+        System.out.println("Hola mundoooo!!!");
         Producto producto1 = new Producto(1,"Leche",10, 4000);
         Producto producto2 = new Producto(2,"Cafe",20, 10000);
         Producto producto3 = new Producto(1,"Chocolate",10, 6000);
