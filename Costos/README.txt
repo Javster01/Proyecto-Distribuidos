@@ -1,3 +1,4 @@
 Integrantes
-Alejandro Mesa 
-Pedro Alonso Pulido Hernández
+- Alejandro Mesa Estupiñan
+- Pedro Alonso Pulido Hernández
+- Hernan Giovanny Carreño Estupiñan
