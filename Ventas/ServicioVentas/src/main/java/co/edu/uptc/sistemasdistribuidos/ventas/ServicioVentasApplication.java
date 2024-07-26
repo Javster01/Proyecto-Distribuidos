@@ -19,7 +19,7 @@ public class ServicioVentasApplication {
         Control control = new Control();
         detallesFactura1.add(new DetalleProducto("Leche Deslactosada",2,4000,
                 control.calcularPrecioTotalProducto(2,4000)));
-        detallesFactura1.add(new DetalleProducto("Cafe",3,10000,
+        detallesFactura1.add(new DetalleProducto("Cafe descafeinado",3,10000,
                 control.calcularPrecioTotalProducto(3,10000)));
         detallesFactura1.add(new DetalleProducto("Chocolate",4,6000,
                 control.calcularPrecioTotalProducto(4,6000)));
