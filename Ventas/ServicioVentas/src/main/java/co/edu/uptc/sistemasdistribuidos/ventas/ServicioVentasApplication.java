@@ -23,8 +23,8 @@ public class ServicioVentasApplication {
                 control.calcularPrecioTotalProducto(3,10000)));
         detallesFactura1.add(new DetalleProducto("Chocolate",4,6000,
                 control.calcularPrecioTotalProducto(4,6000)));
-        Factura factura1 = new Factura(1,new Date(),"1009202",detallesFactura1,control.calcularTotalFactura(detallesFactura1));
-        System.out.println(factura1.toString());
+      //  Factura factura1 = new Factura(1,new Date(),"1009202",detallesFactura1,control.calcularTotalFactura(detallesFactura1));
+      //  System.out.println(factura1.toString());
 
         SpringApplication.run(ServicioVentasApplication.class, args);
     }

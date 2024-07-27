@@ -1,13 +1,33 @@
 package co.edu.uptc.sistemasdistribuidos.ventas.model;
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+
+
+@Entity
 public class Factura {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idFactura;
+
+    @Column(nullable = false)
     private Date fecha;
+
+    @Column(nullable = false)
     private String cliente;
+
+    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DetalleProducto> detalleProductos;
+
+    @Column(nullable = false)
     private double totalFactura;
+
+    public Factura() {}
 
     public Factura(int idFactura, Date fecha, String cliente, List<DetalleProducto> detalleProductos, double totalFactura) {
         this.idFactura = idFactura;
@@ -17,57 +37,19 @@ public class Factura {
         this.totalFactura = totalFactura;
     }
 
-    public int getIdFactura() {
-        return idFactura;
-    }
-
-    public void setIdFactura(int idFactura) {
-        this.idFactura = idFactura;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<DetalleProducto> getDetalleProductos() {
-        return detalleProductos;
-    }
-
-    public void setDetalleProductos(List<DetalleProducto> detalleProductos) {
-        this.detalleProductos = detalleProductos;
-    }
-
-    public double getTotalFactura() {
-        return totalFactura;
-    }
-
-    public void setTotalFactura(double totalFactura) {
-        this.totalFactura = totalFactura;
-    }
+    // Getters and setters
 
     @Override
     public String toString() {
-        String  detalleProductosString="";
+        StringBuilder detalleProductosString = new StringBuilder();
         for (DetalleProducto detalleProducto : detalleProductos) {
-            detalleProductosString += detalleProducto.toString()+"\n";
+            detalleProductosString.append(detalleProducto.toString()).append("\n");
         }
         return "Factura:\n" +
                 "IdFactura: " + idFactura +"\n"+
                 "Fecha: " + fecha +"\n"+
                 "Cliente: " + cliente + '\n' +
-                "Producto     Cantidad      PrecioUnitario      PrecioTotalProducto\n" + detalleProductosString+
+                "Producto     Cantidad      PrecioUnitario      PrecioTotalProducto\n" + detalleProductosString +
                 "TotalFactura: " + totalFactura;
     }
 }

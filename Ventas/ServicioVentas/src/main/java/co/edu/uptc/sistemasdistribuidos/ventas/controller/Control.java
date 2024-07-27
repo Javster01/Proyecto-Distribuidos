@@ -8,11 +8,13 @@ public class Control {
         return cantidad * precioProducto;
     }
 
-    public double calcularTotalFactura(List<DetalleProducto> detalles) {
+  /*  public double calcularTotalFactura(List<DetalleProducto> detalles) {
         double totalFactura = 0;
         for (DetalleProducto detalleProducto : detalles) {
             totalFactura += detalleProducto.getPrecioTotalProducto();
         }
         return totalFactura;
     }
+
+   */
 }
