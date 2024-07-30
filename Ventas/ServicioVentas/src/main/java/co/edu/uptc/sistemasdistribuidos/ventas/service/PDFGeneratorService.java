@@ -33,14 +33,24 @@ public class PDFGeneratorService {
             contenidoStream.showText("Detalles del Producto:");
             contenidoStream.newLineAtOffset(0, -15);
 
+            double totalFactura = 0;
+
             for (DetalleProducto detalleProducto : factura.getDetalleProductos()) {
+                double totalProducto = detalleProducto.getCantidadProducto() * detalleProducto.getPrecioUnitarioProducto();
                 contenidoStream.showText("Producto: " + detalleProducto.getNombreProducto() +
                         ", Cantidad: " + detalleProducto.getCantidadProducto() +
                         ", Precio Unitario: " + detalleProducto.getPrecioUnitarioProducto() +
-                        ", Precio Total: " + detalleProducto.getPrecioTotalProducto());
+                        ", Precio Total: " + totalProducto);
                 contenidoStream.newLineAtOffset(0, -15);
+                totalFactura += totalProducto;
             }
 
+            contenidoStream.newLineAtOffset(0, -15);
+            contenidoStream.showText("Total Factura: " + totalFactura);
+            contenidoStream.newLineAtOffset(0, -15);
+            contenidoStream.showText("Dinero Recibido: " + factura.getDineroRecibido());
+            contenidoStream.newLineAtOffset(0, -15);
+            contenidoStream.showText("Cambio: " + factura.getCambio());
             contenidoStream.endText();
             contenidoStream.close();
 

@@ -24,13 +24,21 @@ public class Factura {
     @Column(nullable = false)
     private double totalFactura;
 
+    @Column(nullable = false)
+    private double dineroRecibido;
+
+    @Column(nullable = false)
+    private double cambio;
+
     public Factura() {}
 
-    public Factura(Date fecha, String cliente, List<DetalleProducto> detalleProductos, double totalFactura) {
+    public Factura(Date fecha, String cliente, List<DetalleProducto> detalleProductos, double totalFactura, double dineroRecibido, double cambio) {
         this.fecha = fecha;
         this.cliente = cliente;
         this.detalleProductos = detalleProductos;
         this.totalFactura = totalFactura;
+        this.dineroRecibido = dineroRecibido;
+        this.cambio = cambio;
     }
 
     // Getters and Setters
@@ -75,6 +83,22 @@ public class Factura {
         this.totalFactura = totalFactura;
     }
 
+    public double getDineroRecibido() {
+        return dineroRecibido;
+    }
+
+    public void setDineroRecibido(double dineroRecibido) {
+        this.dineroRecibido = dineroRecibido;
+    }
+
+    public double getCambio() {
+        return cambio;
+    }
+
+    public void setCambio(double cambio) {
+        this.cambio = cambio;
+    }
+
     @Override
     public String toString() {
         StringBuilder detalleProductosString = new StringBuilder();
@@ -86,6 +110,8 @@ public class Factura {
                 "Fecha: " + fecha + "\n" +
                 "Cliente: " + cliente + '\n' +
                 "Producto     Cantidad      PrecioUnitario      PrecioTotalProducto\n" + detalleProductosString +
-                "TotalFactura: " + totalFactura;
+                "TotalFactura: " + totalFactura + "\n" +
+                "DineroRecibido: " + dineroRecibido + "\n" +
+                "Cambio: " + cambio;
     }
 }

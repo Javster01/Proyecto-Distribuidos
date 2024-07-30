@@ -2,92 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Realizar Compra</title>
-</head>
-<body>
-<h1>Realizar Compra</h1>
-<form id="compraForm">
-    <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fecha" required><br><br>
+    <title>Generar Factura</title>
+    <script>
+        async function generateInvoice() {
+            const cliente = document.getElementById('cliente').value;
+            const fecha = document.getElementById('fecha').value;
+            const dineroRecibido = parseFloat(document.getElementById('dineroRecibido').value);
+            const detalleProductos = [];
 
-    <label for="cliente">Cliente:</label>
-    <input type="text" id="cliente" name="cliente" required><br><br>
-
-    <h3>Detalles del Producto</h3>
-    <div id="productos">
-        <div class="producto">
-            <label for="nombreProducto">Nombre del Producto:</label>
-            <input type="text" class="nombreProducto" name="nombreProducto" required><br><br>
-
-            <label for="cantidadProducto">Cantidad:</label>
-            <input type="number" class="cantidadProducto" name="cantidadProducto" required><br><br>
-
-            <label for="precioUnitarioProducto">Precio Unitario:</label>
-            <input type="number" step="0.01" class="precioUnitarioProducto" name="precioUnitarioProducto" required><br><br>
-        </div>
-    </div>
-    <button type="button" id="addProduct">Añadir Producto</button><br><br>
-    <button type="submit">Generar Factura</button>
-</form>
-
-<script>
-    document.getElementById('addProduct').addEventListener('click', function() {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('producto');
-        productDiv.innerHTML = `
-                <label for="nombreProducto">Nombre del Producto:</label>
-                <input type="text" class="nombreProducto" name="nombreProducto" required><br><br>
-
-                <label for="cantidadProducto">Cantidad:</label>
-                <input type="number" class="cantidadProducto" name="cantidadProducto" required><br><br>
-
-                <label for="precioUnitarioProducto">Precio Unitario:</label>
-                <input type="number" step="0.01" class="precioUnitarioProducto" name="precioUnitarioProducto" required><br><br>
-            `;
-        document.getElementById('productos').appendChild(productDiv);
-    });
-
-    document.getElementById('compraForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const productos = [];
-        document.querySelectorAll('.producto').forEach(producto => {
-            productos.push({
-                nombreProducto: producto.querySelector('.nombreProducto').value,
-                cantidadProducto: producto.querySelector('.cantidadProducto').value,
-                precioUnitarioProducto: producto.querySelector('.precioUnitarioProducto').value
+            document.querySelectorAll('.producto').forEach(producto => {
+                const nombreProducto = producto.querySelector('.nombreProducto').value;
+                const cantidadProducto = parseInt(producto.querySelector('.cantidadProducto').value);
+                const precioUnitarioProducto = parseFloat(producto.querySelector('.precioUnitarioProducto').value);
+                detalleProductos.push({
+                    nombreProducto,
+                    cantidadProducto,
+                    precioUnitarioProducto
+                });
             });
-        });
 
-        const factura = {
-            fecha: document.getElementById('fecha').value,
-            cliente: document.getElementById('cliente').value,
-            detalleProductos: productos
-        };
+            const factura = {
+                cliente,
+                fecha,
+                detalleProductos,
+                dineroRecibido
+            };
 
-        fetch('/api/facturas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(factura)
-        })
-            .then(response => response.blob())
-            .then(blob => {
+            const response = await fetch('/api/facturas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(factura)
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.style.display = 'none';
                 a.href = url;
                 a.download = 'factura.pdf';
                 document.body.appendChild(a);
                 a.click();
-                window.URL.revokeObjectURL(url);
-                alert('Compra realizada con éxito');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    });
-</script>
+                a.remove();
+            } else {
+                console.error('Error al generar la factura');
+            }
+        }
+
+        function addProduct() {
+            const productTemplate = `
+                <div class="producto">
+                    <input type="text" class="nombreProducto" placeholder="Nombre del Producto" required>
+                    <input type="number" class="cantidadProducto" placeholder="Cantidad" required>
+                    <input type="number" step="0.01" class="precioUnitarioProducto" placeholder="Precio Unitario" required>
+                </div>`;
+            document.getElementById('productos').insertAdjacentHTML('beforeend', productTemplate);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addProduct();
+            document.getElementById('addProduct').addEventListener('click', addProduct);
+        });
+    </script>
+</head>
+<body>
+<h1>Generar Factura</h1>
+<form onsubmit="event.preventDefault(); generateInvoice();">
+    <input type="text" id="cliente" placeholder="Nombre del Cliente" required><br>
+    <input type="date" id="fecha" required><br>
+    <div id="productos"></div>
+    <button type="button" id="addProduct">Añadir Producto</button><br>
+    <input type="number" step="0.01" id="dineroRecibido" placeholder="Dinero Recibido" required><br>
+    <button type="submit">Generar Factura</button>
+</form>
 </body>
 </html>

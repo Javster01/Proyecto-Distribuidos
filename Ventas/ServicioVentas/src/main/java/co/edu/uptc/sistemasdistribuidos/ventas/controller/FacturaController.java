@@ -2,13 +2,6 @@ package co.edu.uptc.sistemasdistribuidos.ventas.controller;
 
 import co.edu.uptc.sistemasdistribuidos.ventas.model.Factura;
 import co.edu.uptc.sistemasdistribuidos.ventas.repository.FacturaRepository;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import co.edu.uptc.sistemasdistribuidos.ventas.model.Factura;
-import co.edu.uptc.sistemasdistribuidos.ventas.repository.FacturaRepository;
 import co.edu.uptc.sistemasdistribuidos.ventas.service.PDFGeneratorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,6 +39,8 @@ public class FacturaController {
             totalFactura += detalle.getPrecioTotalProducto();
         }
         factura.setTotalFactura(totalFactura);
+        double cambio = factura.getDineroRecibido() - totalFactura;
+        factura.setCambio(cambio);
         Factura savedFactura = facturaRepository.save(factura);
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
