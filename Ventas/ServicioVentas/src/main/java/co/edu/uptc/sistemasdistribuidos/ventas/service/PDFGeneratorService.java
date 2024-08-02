@@ -11,7 +11,13 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
+/**
+ * Clase que Genera el PDF de la Factura de Venta
+ *  @author Juliana Rincon
+ *  @author Luisa Merchan
+ *  @author Juan Diego
+ * @author Sebastian Camargo
+ */
 @Service
 public class PDFGeneratorService {
 

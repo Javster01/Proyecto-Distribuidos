@@ -1,84 +1,95 @@
+/* Estilo global para el cuerpo del documento */
 body {
-  font-family: Arial, sans-serif;
-  background-image: url('./carro-compras.avif');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+  font-family: Arial, sans-serif; /* Define la fuente predeterminada */
+  background-image: url('./carro-compras.avif'); /* Imagen de fondo */
+  background-repeat: no-repeat; /* No repetir la imagen de fondo */
+  background-size: cover; /* Ajustar la imagen de fondo para cubrir toda la pantalla */
+  background-position: center; /* Centrar la imagen de fondo */
+  display: flex; /* Usar flexbox para centrar contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Altura de la ventana gráfica */
+  margin: 0; /* Eliminar márgenes predeterminados */
 }
 
+/* Estilo para el contenedor principal */
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  max-width: 800px; /* Ancho máximo */
+  margin: 0 auto; /* Centrar horizontalmente */
+  padding: 20px; /* Espaciado interno */
+  background-color: #fff; /* Color de fondo blanco */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra alrededor del contenedor */
 }
 
+/* Estilo para el contenedor del título */
 .titulo-container {
-  background-color: #37a451;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px 5px 0 0;
-  color: white;
+  background-color: #37a451; /* Color de fondo verde */
+  text-align: center; /* Centrar texto */
+  padding: 30px; /* Espaciado interno */
+  border-radius: 5px 5px 0 0; /* Bordes redondeados en la parte superior */
+  color: white; /* Color del texto blanco */
 }
 
+/* Estilo para los títulos h1 */
 h1 {
-  margin: 0;
-  font-size: 35px;
-  font-weight: bold;
+  margin: 0; /* Eliminar márgenes */
+  font-size: 35px; /* Tamaño de fuente */
+  font-weight: bold; /* Fuente en negrita */
 }
 
+/* Estilo para etiquetas de productos */
 .lbProducto {
-  font-size: 18px;
+  font-size: 18px; /* Tamaño de fuente */
 }
 
+/* Estilo para entradas de productos */
 .ipProducto {
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 200px; /* Ancho fijo */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
 }
 
+/* Estilo para etiquetas y entradas de formularios */
 label, input[type="date"], input[type="text"], input[type="number"] {
-  font-size: 18px;
-  display: block;
-  width: calc(100% - 22px);
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  font-size: 18px; /* Tamaño de fuente */
+  display: block; /* Mostrar como bloque */
+  width: calc(100% - 22px); /* Ancho del 100% menos el padding */
+  margin-bottom: 10px; /* Espacio inferior */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
 }
 
+/* Estilo para botones */
 .btn-agregar-producto, .btnImprimir {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-bottom: 10px;
+  width: 100%; /* Ancho del 100% */
+  padding: 10px; /* Espaciado interno */
+  background-color: #4CAF50; /* Color de fondo verde */
+  color: white; /* Color del texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 18px; /* Tamaño de fuente */
+  cursor: pointer; /* Cursor de mano al pasar por encima */
+  margin-bottom: 10px; /* Espacio inferior */
 }
 
+/* Estilo para los botones al pasar el ratón por encima */
 .btn-agregar-producto:hover, .btnImprimir:hover {
-  background-color: #45a049;
+  background-color: #45a049; /* Color de fondo verde oscuro */
 }
 
+/* Estilo para el contenedor del formulario */
 .form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+  display: flex; /* Usar flexbox */
+  flex-direction: column; /* Dirección de los hijos en columna */
+  gap: 10px; /* Espacio entre elementos */
+  padding: 20px; /* Espaciado interno */
 }
 
+/* Estilo para cada producto en la lista */
 .producto {
-  display: flex;
-  gap: 10px;
+  display: flex; /* Usar flexbox */
+  gap: 10px; /* Espacio entre elementos */
 }
