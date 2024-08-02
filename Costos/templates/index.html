@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Define el conjunto de caracteres para el documento y el diseño responsivo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Costos</title>
+    <style>
+        /* Estilos generales para el cuerpo del documento */
+        body {
+            font-family: Arial, sans-serif; /* Define la fuente del documento */
+            margin: 20px; /* Margen alrededor del contenido del documento */
+            color: #333; /* Color del texto */
+        }
+
+        /* Estilos para el título principal */
+        h1 {
+            color: #007BFF; /* Color del texto del título */
+            border-bottom: 2px solid #007BFF; /* Línea debajo del título */
+            padding-bottom: 10px; /* Espacio debajo del título */
+        }
+
+        /* Estilos para los subtítulos */
+        h2 {
+            border-bottom: 1px solid #ddd; /* Línea debajo del subtítulo */
+            padding-bottom: 5px; /* Espacio debajo del subtítulo */
+            margin-bottom: 15px; /* Margen debajo del subtítulo */
+            color: #333; /* Color del texto del subtítulo */
+        }
+
+        /* Estilos para los títulos de tercer nivel */
+        h3 {
+            color: #555; /* Color del texto del título */
+            margin-top: 10px; /* Margen superior del título */
+        }
+
+        /* Estilos para el contenedor del encabezado */
+        .header {
+            display: flex; /* Utiliza flexbox para la disposición */
+            justify-content: space-between; /* Distribuye el espacio entre los elementos */
+            align-items: center; /* Alinea los elementos verticalmente al centro */
+            margin-bottom: 20px; /* Margen debajo del encabezado */
+        }
+
+        /* Estilos para la fecha y la hora */
+        .date, .clock {
+            font-size: 1.2em; /* Tamaño de fuente */
+        }
+
+        /* Estilos específicos para la hora */
+        .clock {
+            font-weight: bold; /* Negrita */
+            color: #333; /* Color del texto */
+        }
+
+        /* Estilos para los contenedores de los gráficos */
+        .container {
+            display: flex; /* Utiliza flexbox para la disposición */
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+            gap: 20px; /* Espacio entre los elementos */
+        }
+
+        /* Estilos para cada contenedor de gráfico */
+        .chart-container {
+            flex: 1 1 45%; /* Define el ancho y el comportamiento de los contenedores */
+            text-align: center; /* Centra el texto dentro del contenedor */
+        }
+
+        /* Estilos para las imágenes dentro de los contenedores de gráficos */
+        .chart-container img {
+            max-width: 100%; /* La imagen no excederá el ancho del contenedor */
+            height: auto; /* La altura se ajusta automáticamente */
+            border: 1px solid #ddd; /* Borde alrededor de la imagen */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+
+        /* Estilos para las tablas */
+        table {
+            width: 100%; /* La tabla ocupa el 100% del ancho disponible */
+            border-collapse: collapse; /* Colapsa los bordes de las celdas */
+            margin-top: 20px; /* Margen superior de la tabla */
+        }
+
+        /* Estilos para las celdas de la tabla */
+        th, td {
+            border: 1px solid #ddd; /* Borde alrededor de las celdas */
+            padding: 12px; /* Espacio interno en las celdas */
+            text-align: left; /* Alinea el texto a la izquierda */
+        }
+
+        /* Estilos para las celdas de encabezado de la tabla */
+        th {
+            background-color: #f2f2f2; /* Color de fondo del encabezado */
+            color: #555; /* Color del texto del encabezado */
+        }
+
+        /* Estilos para las filas pares de la tabla */
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Color de fondo para las filas pares */
+        }
+
+        /* Estilos para los enlaces */
+        a {
+            display: inline-block; /* Muestra el enlace como un bloque en línea */
+            padding: 10px 20px; /* Espacio interno en el enlace */
+            margin-top: 20px; /* Margen superior del enlace */
+            background-color: #007BFF; /* Color de fondo del enlace */
+            color: #fff; /* Color del texto del enlace */
+            text-decoration: none; /* Quita el subrayado del enlace */
+            font-weight: bold; /* Negrita en el texto del enlace */
+            border-radius: 5px; /* Bordes redondeados en el enlace */
+            text-align: center; /* Centra el texto dentro del enlace */
+        }
+
+        /* Estilos para el enlace al pasar el ratón sobre él */
+        a:hover {
+            background-color: #0056b3; /* Cambia el color de fondo al pasar el ratón */
+        }
+
+        /* Estilos para el contenedor de información adicional */
+        .info {
+            margin-top: 20px; /* Margen superior del contenedor */
+            padding: 15px; /* Espacio interno en el contenedor */
+            border: 1px solid #ddd; /* Borde alrededor del contenedor */
+            border-radius: 8px; /* Bordes redondeados */
+            background-color: #f9f9f9; /* Color de fondo del contenedor */
+        }
+        .resumen-financiero {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .resumen-financiero h3 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+        .resumen-financiero ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .resumen-financiero li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor del encabezado con la fecha y la hora -->
+    <div class="header">
+        <p class="date"><strong>Fecha:</strong> {{ current_date }}</p>
+        <div class="clock" id="clock"></div>
+    </div>
+     
+    <!-- Título principal de la página -->
+    <h1>Informe de Costos</h1>
+    <!-- Muestra el ID del informe -->
+    <p><strong>ID Informe:</strong> {{ invoice_id }}</p>
+    
+    <div class="resumen-financiero">
+        <h3>Resumen Financiero</h3>
+        <p>El informe cubre el período desde {{ fecha_antigua }} hasta {{ fecha_ultima }}.</p>
+        <ul>
+            <li>1. Costos por compra: ${{ "%.2f"|format(resumen_financiero.costos_compra) }}</li>
+            <li>2. Costos por Venta: ${{ "%.2f"|format(resumen_financiero.costos_venta) }}</li>
+            <li>3. Gastos Generales: ${{ "%.2f"|format(resumen_financiero.gastos_generales) }}</li>
+            <li>4. Ganancias: ${{ "%.2f"|format(resumen_financiero.ganancias) }}</li>
+        </ul>
+    </div>
+    
+    <!-- Sección de gráficos de compras -->
+    <h2>Gráficos de Compras</h2>
+    <div class="container">
+        <!-- Contenedor para el gráfico de pastel de compras -->
+        <div class="chart-container">
+            <h3>Gráfico de Pastel de Compras</h3>
+            <img src="{{ url_for('static', filename='pie_plot_compras.png') }}" alt="Gráfico de Pastel de Compras">
+        </div>
+        <!-- Contenedor para el gráfico de barras de compras -->
+        <div class="chart-container">
+            <h3>Gráfico de Barras de Compras</h3>
+            <img src="{{ url_for('static', filename='bar_plot_compras.png') }}" alt="Gráfico de Barras de Compras">
+        </div>
+    </div>
+    
+    <!-- Sección de gráficos de ventas -->
+    <h2>Gráficos de Ventas</h2>
+    <div class="container">
+        <!-- Contenedor para el gráfico de pastel de ventas -->
+        <div class="chart-container">
+            <h3>Gráfico de Pastel de Ventas</h3>
+            <img src="{{ url_for('static', filename='pie_plot_ventas.png') }}" alt="Gráfico de Pastel de Ventas">
+        </div>
+        <!-- Contenedor para el gráfico de barras de ventas -->
+        <div class="chart-container">
+            <h3>Gráfico de Barras de Ventas</h3>
+            <img src="{{ url_for('static', filename='bar_plot_ventas.png') }}" alt="Gráfico de Barras de Ventas">
+        </div>
+    </div>
+
+    <!-- Sección de datos en tabla -->
+    <h2>Datos de la Tabla</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Producto</th>
+                <th>Precio Total Compra</th>
+                <th>Precio Total Venta</th>
+                <th>Cantidad Vendida</th>
+                <th>Rentabilidad</th>
+                <th>Fecha Venta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Itera sobre los datos de la tabla para generar filas -->
+            {% for row in table_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Enlace para descargar el PDF -->
+    <a href="{{ url_for('download_file', filename=pdf_filename) }}" download>Descargar PDF</a>
+
+    <!-- Script para mostrar la hora actual en tiempo real -->
+    <script>
+        function updateClock() {
+            const now = new Date(); // Obtiene la hora actual
+            const hours = String(now.getHours()).padStart(2, '0'); // Formatea las horas
+            const minutes = String(now.getMinutes()).padStart(2, '0'); // Formatea los minutos
+            const seconds = String(now.getSeconds()).padStart(2, '0'); // Formatea los segundos
+            const timeString = `${hours}:${minutes}:${seconds}`; // Crea la cadena de tiempo
+            document.getElementById('clock').textContent = timeString; // Muestra el tiempo en el elemento con id 'clock'
+        }
+
+        // Actualiza el reloj cada segundo
+        setInterval(updateClock, 1000);
+        updateClock(); // Inicializa el reloj inmediatamente
+    </script>
+</body>
+</html>
